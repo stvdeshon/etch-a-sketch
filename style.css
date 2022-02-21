@@ -1,0 +1,30 @@
+body {
+    background-color: #F0F0F0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+#head {
+    margin-bottom: 50px;
+}
+
+#container {
+    display: flex;
+}
+
+.row {
+    display: flex;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+ .col {
+    display: flex;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    /* border: 1px solid black; */
+} 
