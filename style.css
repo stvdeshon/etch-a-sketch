@@ -1,30 +1,50 @@
-body {
-    background-color: #F0F0F0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    flex-direction: column;
+:root {
+    --grid-cols: 1;
 }
 
-#head {
-    margin-bottom: 50px;
+body {
+    box-sizing: border-box;
+    display: grid;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    height: 1fr;
+    width: 100vw;
+    background-color: #f0f0f0;
+    grid-template-rows: auto 1fr;
+    margin: 0;
+}
+
+#header {
+    display: grid;
+    border: 1px solid black;
+    width: 1fr;
+    align-content: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+main {
+    display: grid;
+    height: 95vh;
+    width: 1fr;
+    justify-content: center;
+    align-content: center;
 }
 
 #container {
-    display: flex;
+    display: grid;
+    border: 1px solid black;
+    width: 650px;
+    height: 650px;
+} 
+
+
+.col {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
 }
 
 .row {
-    display: flex;
-    width: 10px;
-    height: 10px;
-    background-color: white;
-    border: 1px solid black;
+    background: white;
 }
-
- .col {
-    display: flex;
-    width: 10px;
-    height: 10px;
-    background-color: white;
-    /* border: 1px solid black; */
-} 
