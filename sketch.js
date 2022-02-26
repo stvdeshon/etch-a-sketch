@@ -30,9 +30,5 @@ function sketchPad(rows) {
 }
 
 
-
-
-
-
-
-sketchPad(64);
+const result = window.prompt('Enter a number of squares');
+sketchPad(result);
