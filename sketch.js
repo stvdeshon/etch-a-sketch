@@ -7,6 +7,7 @@ const randomBtn = document.querySelector('#random');
 let black = true;
 let rainbow = false;
 let random = false;
+let randomized;
 
 
 
@@ -32,39 +33,28 @@ function sketchPad(rows) {
 
    let mouseIsDown = false;
 
-   if (black == true) {
+  //  if (black == true) {
    column.forEach((box) => {
       box.addEventListener('mousedown', function(){mouseIsDown = true});
       box.addEventListener('mouseup', function(){mouseIsDown = false});
       box.addEventListener('mousemove', function(){
-        if(mouseIsDown){
-          box.style.backgroundColor = 'black';   
-        };
+        if(mouseIsDown && rainbow == true){
+          box.style.backgroundColor = rainbowMaker();   
+        } else if (mouseIsDown && black == true) {
+          box.style.backgroundColor = 'black';
+        }
       });
      });
-    }
-    if (rainbow == true){
      column.forEach((box) => {
       box.addEventListener('mousedown', function(){mouseIsDown = true});
       box.addEventListener('mouseup', function(){mouseIsDown = false});
       box.addEventListener('mousemove', function(){
-        if(mouseIsDown){
-          box.style.backgroundColor = rainbowMaker();   
-        };
+        if(mouseIsDown && random == true){ 
+          box.style.backgroundColor = randomized;
+        }
       });
      });
-    }
-    if (random == true){
-      column.forEach((box) => {
-       box.addEventListener('mousedown', function(){mouseIsDown = true});
-       box.addEventListener('mouseup', function(){mouseIsDown = false});
-       box.addEventListener('mousemove', function(){
-         if(mouseIsDown){
-           box.style.backgroundColor = bgColor;   
-         };
-       });
-      });
-     }
+    
 }
 
 // A function to be called on every time the event listener is called if rainbow == true
@@ -73,8 +63,11 @@ function rainbowMaker() {
   let g = Math.floor(Math.random() * 256);
   let b = Math.floor(Math.random() * 256);
   let bgColor = "rgb(" + r + "," + g + "," + b + ")";
+  randomized = bgColor;
   return bgColor;
 }
+
+randomBtn.addEventListener('click', rainbowMaker)
  
 // The follow three functions and their respective event listeners are to change the color, but need work to live update
 function paintItBlack() {
@@ -128,5 +121,3 @@ resetBtn.addEventListener('click', reset);
 
 
 window.onload(sketchPad(32));
-
-
