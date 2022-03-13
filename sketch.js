@@ -77,8 +77,7 @@ function rainbowMaker() {
 }
 
 randomBtn.addEventListener('click', rainbowMaker)
- 
-// The follow three functions and their respective event listeners are to change the color, but need work to live update
+
 function paintItBlack() {
   black = true;
   rainbow = false;
@@ -130,8 +129,6 @@ function reset() {
 }
 
 resetBtn.addEventListener('click', reset);
-
-
 
 window.onload = () => {
 (sketchPad(32));
