@@ -9,7 +9,8 @@ let rainbow = false;
 let random = false;
 let randomized;
 
-
+// Prevents glitches caused by dragging elements inside container
+container.ondragstart = function() {return false;};
 
 function sketchPad(rows) {
    for (let i = 0; i < rows; i++) {
@@ -33,27 +34,35 @@ function sketchPad(rows) {
 
    let mouseIsDown = false;
 
-  //  if (black == true) {
    column.forEach((box) => {
       box.addEventListener('mousedown', function(){mouseIsDown = true});
-      box.addEventListener('mouseup', function(){mouseIsDown = false});
+      // box.addEventListener('mouseup', function(){mouseIsDown = false});
       box.addEventListener('mousemove', function(){
-        if(mouseIsDown && rainbow == true){
+        if(mouseIsDown && rainbow){
           box.style.backgroundColor = rainbowMaker();   
-        } else if (mouseIsDown && black == true) {
+        } else if (mouseIsDown && black) {
           box.style.backgroundColor = 'black';
         }
       });
      });
      column.forEach((box) => {
       box.addEventListener('mousedown', function(){mouseIsDown = true});
-      box.addEventListener('mouseup', function(){mouseIsDown = false});
+      // box.addEventListener('mouseup', function(){mouseIsDown = false});
       box.addEventListener('mousemove', function(){
-        if(mouseIsDown && random == true){ 
+        if(mouseIsDown && random){ 
           box.style.backgroundColor = randomized;
         }
       });
      });
+
+     //Previously listening for mouseup on the container was causing a bug, so I had it listen for mouseup on the body
+     document.body.addEventListener('mouseup', function(){
+       mouseIsDown = false;
+     })
+     //Prevents bugs if someone drags outside the window
+     document.body.addEventListener('mouseleave', function(){
+       mouseIsDown = false;
+     })
     
 }
 
@@ -96,14 +105,18 @@ function randomizer() {
 randomBtn.addEventListener('click', randomizer);
 
 
-//This resizes the pad up to 100
+//This resizes the pad up to 100 and defaults to 32 if the user inputs a number > 100 or cancels
 function resize() {
   
   container.innerHTML = '';
-  result = prompt('pick');
+  result = prompt('Pick a number between 1 and 100, anything more than 100 will default to 32.');
+
   if (result <= 100) {
     sketchPad(result);
-  } else {
+  } else if (result > 100) {
+    sketchPad(32);
+  } 
+  if (result == null) {
     sketchPad(32);
   }
 }
@@ -120,4 +133,6 @@ resetBtn.addEventListener('click', reset);
 
 
 
-window.onload(sketchPad(32));
+window.onload = () => {
+(sketchPad(32));
+}
